@@ -1,0 +1,9 @@
+*.uvguix.*
+*.uvoptx
+*.uvprojx
+
+DebugConfig/
+Objects/
+Listings/
+
+.DS_Store
