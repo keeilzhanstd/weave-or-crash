@@ -71,7 +71,7 @@ typedef struct car {
 
 **Player car**  
 ```C
-void PlayerCar_init(void) //Init player car on lane 2, bottom boundary, with color red.
+void PlayerCar_init(void); //Init player car on lane 2, bottom boundary, with color red.
 ```
 Lane position : Lane position can be changed by the player inputs.  
 Y position : Y position stays at the bottom boundary for the player car.  
@@ -82,12 +82,12 @@ Color : Color of the player car is red.
 Car car_array[car_array_size];
 u16 other_cars_color[4] = {green, blue, yellow, magenta}; //Possible colors for non player cars
 
-void Car_init(void) //Populate car_array with cars.
-void CreateCar(void) //Randomize lanes and colors for the non-player cars.
-void DestroyCar(void) //Once non-player car reaches the bottom of the screen, destroy it.
-void ShowAllCars(void) //Connector to the view component for the car.
-void ClearAllCars(void) //Connector to the view component for the car.
-void CarsMove(void) // Move non-player cars down by Y-axis based on the current difficulty.
+void Car_init(void); //Populate car_array with cars.
+void CreateCar(void); //Randomize lanes and colors for the non-player cars.
+void DestroyCar(void); //Once non-player car reaches the bottom of the screen, destroy it.
+void ShowAllCars(void); //Connector to the view component for the car.
+void ClearAllCars(void); //Connector to the view component for the car.
+void CarsMove(void); // Move non-player cars down by Y-axis based on the current difficulty.
 
 ```
 Lane position : Constant for the non player car and assigned during the CreateCar(void) method. Describes in which lane car will appear during the game.  
@@ -104,11 +104,11 @@ typedef struct laneline {
 
 LaneLine laneline_array[laneline_array_size];
 
-void LaneLine_init(void) //Initialize lane lines.
-void ShowAllLaneLines(void) // Show lane lines between the lanes.
-void ClearAllLaneLines(void) //Clear all lane lines.
-void LaneLinesMove(void) // Move lane lines, to simulate that cars are moving due to relative perspective
-void DrawRoad(void) // Draw background road, lane lines, cars.
+void LaneLine_init(void); //Initialize lane lines.
+void ShowAllLaneLines(void); // Show lane lines between the lanes.
+void ClearAllLaneLines(void); //Clear all lane lines.
+void LaneLinesMove(void); // Move lane lines, to simulate that cars are moving due to relative perspective
+void DrawRoad(void); // Draw background road, lane lines, cars.
 ```
 Exist :  Indicates existence of a lane line on the screen.  
 Y position : Y position changes overtime, to simulate that cars are moving due to relative perspective.  
@@ -116,47 +116,47 @@ Color : Color of the line lane are always same.
 
 **Model Design**  (Score bar)  
 ```C
-void DrawBar(void) // Connector to the view component. Send current level, score to the view.
-void UpdateBar(void) // Connector to the view component. Send updated level, score to the view.
+void DrawBar(void); // Connector to the view component. Send current level, score to the view.
+void UpdateBar(void); // Connector to the view component. Send updated level, score to the view.
 ```
 
 **Other model logic components:**  
 ```C
-void DetectCollision(void) // Detect collision of cars.
-void UpdateSpawnFrequency(void) // Update the frequency of spawning new cars. 
-void IncreaseDifficulty(void) // difficulty += 1, Call UpdateSpawnFrequency().
-void AddScore(void) // Add score. Based on the formula: score += current difficulty
-void Countdown3s(void) // Uses timer, to countdown from 3 before the game starts. Connector to view.
+void DetectCollision(void); // Detect collision of cars.
+void UpdateSpawnFrequency(void); // Update the frequency of spawning new cars. 
+void IncreaseDifficulty(void); // difficulty += 1, Call UpdateSpawnFrequency().
+void AddScore(void); // Add score. Based on the formula: score += current difficulty
+void Countdown3s(void); // Uses timer, to countdown from 3 before the game starts. Connector to view.
 ```
 
 #### View  
 View methods  
 ```C
 // LAB 3 Supplement functions used in our project.
-void IERG3810_TFTLCD_DrawDot(u16 x, u16 y, u16 color) // Supplement function for drawing objects.
-void IERG3810_TFTLCD_FillRectangle(u16 color, u16 start_x, u16 length_x, u16 start_y, u16 length_y) // Supplement function for drawing objects.
-void IERG3810_TFTLCD_SevenSegment(u16 color, u16 start_x, u16 start_y, u8 digit) //Suplement function for drawing digits.
-void IERG3810_TFTLCD_DrawDigit(u16 color, u16 start_x, u16 start_y, int i) // Draw digits. used in countdown method.
-void IERG3810_TFTLCD_ShowChar(u16 x, u16 y, u8 ascii, u16 color, u16 bgcolor) // Draw Characters from char[][] stored in FONT.H
-void IERG3810_TFTLCD_ShowChinChar(u16 x, u16 y, int num, u16 color, u16 bgcolor) // Draw Chinese Characters from char[][] stored in CFONT.H
-void IERG3810_TFTLCD_ShowCharOverlay(u16 x, u16 y, u8 ascii, u16 color) // Draw overlay for Characters from char[][] stored in FONT.H
-void IERG3810_TFTLCD_ShowChinCharOverlay(u16 x, u16 y, int num, u16 color) // Draw Overlay for Chinese Characters from char[][] stored in CFONT.H
+void IERG3810_TFTLCD_DrawDot(u16 x, u16 y, u16 color); // Supplement function for drawing objects.
+void IERG3810_TFTLCD_FillRectangle(u16 color, u16 start_x, u16 length_x, u16 start_y, u16 length_y); // Supplement function for drawing objects.
+void IERG3810_TFTLCD_SevenSegment(u16 color, u16 start_x, u16 start_y, u8 digit); //Suplement function for drawing digits.
+void IERG3810_TFTLCD_DrawDigit(u16 color, u16 start_x, u16 start_y, int i); // Draw digits. used in countdown method.
+void IERG3810_TFTLCD_ShowChar(u16 x, u16 y, u8 ascii, u16 color, u16 bgcolor); // Draw Characters from char[][] stored in FONT.H
+void IERG3810_TFTLCD_ShowChinChar(u16 x, u16 y, int num, u16 color, u16 bgcolor); // Draw Chinese Characters from char[][] stored in CFONT.H
+void IERG3810_TFTLCD_ShowCharOverlay(u16 x, u16 y, u8 ascii, u16 color); // Draw overlay for Characters from char[][] stored in FONT.H
+void IERG3810_TFTLCD_ShowChinCharOverlay(u16 x, u16 y, int num, u16 color); // Draw Overlay for Chinese Characters from char[][] stored in CFONT.H
 ```
 
 ```C
-void IERG3810_TFTLCD_FillRectangleConversion(u16 color, int start_x, u16 length_x, int start_y, u16 length_y) // Fill Rectangle method for the specified game screen
-void IERG3810_TFTLCD_ShowCar(int x, int y, u16 color) // Draw car pixel by pixel
-void IERG3810_TFTLCD_ShowCarOnLane(int lane, int y, u16 color) // Draw car on lane
-void IERG3810_TFTLCD_ClearCarOnLane(int lane, int y, u16 bgcolor) // "Destroy cars on lane"
-void IERG3810_TFTLCD_ShowLaneLine(int laneline, int y, u16 color) // Draw lane lines.
-void IERG3810_TFTLCD_ClearLaneLine(int laneline, int y, u16 bgcolor) // Clear lane lines.
-void IERG3810_TFTLCD_DrawLogo(u16 x, u16 y) // Draw logo using char[] stored in Logo.H
-void IERG3810_TFTLCD_ShowStartScreen(void) // Show names, cuids, game controls and logo on the start page
-void IERG3810_TFTLCD_ShowLoudlyCryingFace(u16 x, u16 y, u16 scale) // Draw loudly crying face emoji
-u16 IERG3810_DetermineNumberOfDigits(u16 x) // See how many digit space number requires.
-void IERG3810_TFTLCD_ShowFinalScore(u16 score) // Show game over page. Including crying face, and final score
-void IERG3810_TFTLCD_ShowLevel(u16 difficulty) // Convert u16 digit into the screen dificulty and show it.
-void IERG3810_TFTLCD_ShowScore(u16 score) // Convert u16 digit into the screen score and show it.
+void IERG3810_TFTLCD_FillRectangleConversion(u16 color, int start_x, u16 length_x, int start_y, u16 length_y); // Fill Rectangle method for the specified game screen
+void IERG3810_TFTLCD_ShowCar(int x, int y, u16 color); // Draw car pixel by pixel
+void IERG3810_TFTLCD_ShowCarOnLane(int lane, int y, u16 color); // Draw car on lane
+void IERG3810_TFTLCD_ClearCarOnLane(int lane, int y, u16 bgcolor); // "Destroy cars on lane"
+void IERG3810_TFTLCD_ShowLaneLine(int laneline, int y, u16 color); // Draw lane lines.
+void IERG3810_TFTLCD_ClearLaneLine(int laneline, int y, u16 bgcolor); // Clear lane lines.
+void IERG3810_TFTLCD_DrawLogo(u16 x, u16 y); // Draw logo using char[] stored in Logo.H
+void IERG3810_TFTLCD_ShowStartScreen(void); // Show names, cuids, game controls and logo on the start page
+void IERG3810_TFTLCD_ShowLoudlyCryingFace(u16 x, u16 y, u16 scale); // Draw loudly crying face emoji
+u16 IERG3810_DetermineNumberOfDigits(u16 x); // See how many digit space number requires.
+void IERG3810_TFTLCD_ShowFinalScore(u16 score); // Show game over page. Including crying face, and final score
+void IERG3810_TFTLCD_ShowLevel(u16 difficulty); // Convert u16 digit into the screen dificulty and show it.
+void IERG3810_TFTLCD_ShowScore(u16 score); // Convert u16 digit into the screen score and show it.
 
 ```
 
